@@ -2,9 +2,11 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { api } from "./api";
 
-Vue.prototype.$api = api;
+// 注入$api,这样声明能够在使用的时候再进行引入，降低首屏的加载压力
+Vue.prototype.$api = async function () {
+  return await import("./api");
+};
 
 Vue.config.productionTip = false;
 

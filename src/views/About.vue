@@ -6,12 +6,14 @@
 
 <script>
 export default {
-  mounted() {
-    this.$api.petstore.store.getInventory.request().then((res) => {
+  async mounted() {
+    const api = await this.$api();
+    api.api.petstore.store.getInventory.request().then((res) => {
       console.log("res: ", res);
+      return res;
     });
-    const url = this.$api.petstore.store.getInventory.getUrl();
+    const url = api.api.petstore.store.getInventory.getUrl();
     console.log("url: ", url);
   },
-}
+};
 </script>
